@@ -1,5 +1,8 @@
 'usr strict'
 let crypto = require('crypto');
+let https = require('https');
+let util = require('util');
+let accessTokenJson = require('./access_token');
 
 var weChat = function(config){
     this.config = config;
