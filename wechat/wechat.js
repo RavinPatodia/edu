@@ -10,7 +10,7 @@ var weChat = function(config){
     this.config = config;
     this.token = config.token;
     this.appID = config.appID;
-    this.appScrect = config.appScrect;
+    this.appScrect = config.appscrect;
     this.apiDomain = config.apiDomain;
     this.accessTokenApi = config.accessTokenApi;
 
