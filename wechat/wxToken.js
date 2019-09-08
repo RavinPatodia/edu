@@ -21,13 +21,13 @@ var token={
                         if(this.checkValidate(token)){
                             resolve(token);
                         }else{
-                            this.reloadToken();
+                            resolve(this.reloadToken());
                         }
                     }else{
-                        this.reloadToken();
+                        resolve(this.reloadToken());
                     }
                 }else{
-                    this.reloadToken();
+                    resolve(this.reloadToken());
                 }
             });
             
