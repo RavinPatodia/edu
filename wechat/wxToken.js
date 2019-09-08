@@ -27,7 +27,7 @@ var token={
                         resolve(this.reloadToken());
                     }
                 }else{
-                    resolve(this.reloadToken());
+                    reloadToken();
                 }
             });
             
