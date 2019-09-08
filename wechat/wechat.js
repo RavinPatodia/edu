@@ -31,6 +31,24 @@ var weChat = function(config){
 }
 
 weChat.prototype.auth = function(req,res){
+  
+  this.getAccessToken().then(function(data){
+    let options={
+        url:'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' + data,
+        form: JSON.stringify(menus),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    request.post(options,function(err,res,body){
+        if(err){
+            console.log(err)
+        }else{
+            console.log(body);
+        }
+    });
+  });
+  
   let signature = req.query.signature;
   let timestamp = req.query.timestamp;
   let nonce =req.query.nonce;
@@ -74,5 +92,17 @@ weChat.prototype.getAccessToken = function(){
          });
      })
 }
+
+let menus={
+    "button": [
+       {
+           "name":"ceshi",
+           "sub_button":[{
+            "type":"view",
+            "name":"authLogin",
+            "url":""
+           }]
+       }]
+};
 
 module.exports = weChat;
