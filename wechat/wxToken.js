@@ -53,7 +53,7 @@ let reloadToken=function(){
                      let now = new Date();
                      now.setSeconds(now.getSeconds() + tokenJson.expires_in);
                      tokenJson.time=now;
-                     fs.writeFile(ACCESS_TOKEN_FILE,token,JSON.stringify(tokenJson));
+                     fs.writeFile(ACCESS_TOKEN_FILE,JSON.stringify(tokenJson));
                      resolve(tokenJson);
                  }else{
                      reject(err);
