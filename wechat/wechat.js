@@ -12,7 +12,7 @@ weChat.prototype.auth = function(req,res){
   let nonce =req.query.nonce;
   let echostr = req.query.echostr;
 
-  let array = [config.token,timestamp,nonce];
+  let array = [this.token,timestamp,nonce];
   array.sort();
   
   let tempStr = array.join('');
