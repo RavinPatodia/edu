@@ -5,13 +5,13 @@ const request = require('request');
 const qs = require('querystring');
 const config = require('../config');
 const ACCESS_TOKEN_FILE = require('./accessToken');
-var token={
-    checkValidate: function(token){
-        let now = new Date();
-        let time = new Date(token.time);
-        return now.getTime() - time.getTime() <0;
-    },
-    getToken: function(){
+
+let checkValidate= function(token){
+    let now = new Date();
+    let time = new Date(token.time);
+    return now.getTime() - time.getTime() <0;
+};
+let getToken=function(){
         return new Promise(function(resolve,reject){
             fs.exists(ACCESS_TOKEN_FILE,function(exists){
                 if(exists){
@@ -21,10 +21,10 @@ var token={
                         if(this.checkValidate(token)){
                             resolve(token);
                         }else{
-                            resolve(this.reloadToken());
+                            reloadToken();
                         }
                     }else{
-                        resolve(this.reloadToken());
+                        reloadToken();
                     }
                 }else{
                     reloadToken();
@@ -32,8 +32,9 @@ var token={
             });
             
         });
-    },
-    reloadToken: function(){
+    };
+
+let reloadToken=function(){
         let queryParams = {
             'grant_type':'client_credential',
             'appid':config.appID,
@@ -45,7 +46,7 @@ var token={
             method:'GET',
             url:wxGetAccessTokenBaseUrl
         };
-        return new Promise((resolve,reject) =>{
+        return new Promise(function (resolve,reject){
              request(options,function(err,res,body){
                  if(res){
                      let tokenJson = JSON.parse(body);
@@ -58,8 +59,7 @@ var token={
                      reject(err);
                  }
              });
-         })
-    }
+         });
+    };
 
-}
-module.exports = token;
+module.exports = getToken;
