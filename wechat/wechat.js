@@ -10,9 +10,7 @@ var weChat = function(config){
     this.config = config;
     this.token = config.token;
     this.appID = config.appID;
-    this.appScrect = config.appscrect;
-    this.apiDomain = config.apiDomain;
-    this.accessTokenApi = config.accessTokenApi;
+    this.appSecret = config.appsecret;
 
     this.requestGet = function(url){
         return new Promise(function(resolve,reject){
@@ -58,7 +56,7 @@ weChat.prototype.getAccessToken = function(){
     let queryParams = {
         'grant_type':'client_credential',
         'appid':that.appID,
-        'secret':that.appScrect
+        'secret':that.appSecret
     };
 
     let wxGetAccessTokenBaseUrl = 'https://api.weixin.qq.com/cgi-bin/token?'+qs.stringify(queryParams);
