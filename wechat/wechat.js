@@ -55,7 +55,7 @@ weChat.prototype.getAccessToken = function(){
     var that = this;
     return new Promise(function(resolve,reject){
         var currentTime = new Date().getTime();
-        var url = util.format(that.apiURL.accessTokenApi,that.apiDomain,that.appID,that.appScrect);
+        var url = util.format(that.accessTokenApi,that.apiDomain,that.appID,that.appScrect);
         if(accessTokenJson.access_token === "" || accessTokenJson.expires_time < currentTime){
             that.requestGet(url).then(function(data){
                 var result = JSON.parse(data); 
