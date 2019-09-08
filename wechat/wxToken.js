@@ -1,5 +1,6 @@
 'usr strict';
 const util = require('util');
+const fileUtil = require('./fileUtil');
 const fs = require('fs');
 const request = require('request');
 const qs = require('querystring');
@@ -14,7 +15,8 @@ let getToken=function(){
         return new Promise(function(resolve,reject){
             fs.exists('./wechat/access_token.json',function(exists){
                 if(exists){
-                    let token = fs.readFile('./wechat/access_token.json');
+                    
+                    let token = fileUtil.readFile('./wechat/access_token.json');
                     token =token?JSON.parse(token.trim()):token;
                     if(token){
                         if(this.checkValidate(token)){
@@ -52,7 +54,7 @@ let reloadToken=function(){
                      let now = new Date();
                      now.setSeconds(now.getSeconds() + tokenJson.expires_in);
                      tokenJson.time=now;
-                     fs.writeFile('./wechat/access_token.json',JSON.stringify(tokenJson));
+                     fileUtil.writeFile('./wechat/access_token.json',JSON.stringify(tokenJson));
                      resolve(tokenJson);
                  }else{
                      reject(err);
