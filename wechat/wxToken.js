@@ -19,9 +19,9 @@ let getToken=function(){
                     let token = fileUtil.readFile('./wechat/access_token.json');
                     token =token?JSON.parse(token.trim()):token;
                     if(token){
-                        console.log(token);
+                        console.log("token:read from file"+token);
                         if(checkValidate(token)){
-                            resolve(token);
+                            resolve(token.access_token);
                         }else{
                             reloadToken();
                         }
@@ -52,12 +52,13 @@ let reloadToken=function(){
              request(options,function(err,res,body){
                  if(res){
                      let tokenJson = JSON.parse(body);
-                     console.log(tokenJson)
+                     console.log("token:get from net"+tokenJson)
                      let now = new Date();
                      now.setSeconds(now.getSeconds() + tokenJson.expires_in);
                      tokenJson.time=now;
                      fileUtil.writeFile('./wechat/access_token.json',JSON.stringify(tokenJson));
-                     resolve(tokenJson);
+                     console.log("token has writed"+tokenJson.access_token)
+                     resolve(tokenJson.access_token);
                  }else{
                      reject(err);
                  }
