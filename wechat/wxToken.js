@@ -40,7 +40,7 @@ let reloadToken=function(){
         let queryParams = {
             'grant_type':'client_credential',
             'appid':config.appID,
-            'secret':config.appSecret
+            'secret':config.appsecret
         };
     
         let wxGetAccessTokenBaseUrl = config.accessTokenApi+qs.stringify(queryParams);
