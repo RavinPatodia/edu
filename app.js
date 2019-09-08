@@ -8,7 +8,7 @@ app.get('/' ,function(req,res){
 });
 
 app.get('/getAccessToken',function(req,res){
-  wxToken.getToken().then(function(data){
+  wxToken().then(function(data){
     res.send(data);
   });
 });
