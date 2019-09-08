@@ -3,10 +3,9 @@ const util = require('util');
 const fs = require('fs');
 const request = require('request');
 const qs = require('querystring');
-const config = request('../config');
-
+const config = require('../config');
+const ACCESS_TOKEN_FILE = require('./accessToken');
 var token={
-    ACCESS_TOKEN_FILE = __dirname + "/../wechat/accessToken.json",
     checkValidate: function(token){
         let now = new Date();
         let time = new Date(token.time);
