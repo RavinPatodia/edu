@@ -4,14 +4,6 @@ const fs = require('fs');
 const request = require('request');
 const config = require('../config');
 const wxToken =require('./wxToken');
-const token =getToken();
-
-function getToken(){
-    wxToken().then(function(data){
-        console.log(data);
-        return data;
-      });
-}
 let menus = {
  "button": [
      {
@@ -25,7 +17,7 @@ let menus = {
      }]
 };
 
-let createMenu = function(){
+let createMenu = function(token){
     let options = {
         url:config.createMenuApi+token,
         form:JSON.stringify(menus),

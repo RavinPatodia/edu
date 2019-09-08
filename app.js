@@ -15,7 +15,8 @@ app.get('/getAccessToken',function(req,res){
 });
 app.get('/createMenu',function(req,res){
   wxToken().then(function(data){
-    wxMenu();
+    console.log("server token"+data);
+    wxMenu(data);
   });
 });
 
