@@ -1,9 +1,10 @@
 'usr strict'
-let crypto = require('crypto');
-let https = require('https');
-let util = require('util');
-let fs = require('fs');
-let accessTokenJson = require('./access_token');
+const crypto = require('crypto');
+const https = require('https');
+const util = require('util');
+const fs = require('fs');
+const request = require('request');
+const qs = require('querystring');
 
 var weChat = function(config){
     this.config = config;
@@ -53,25 +54,27 @@ weChat.prototype.auth = function(req,res){
 
 weChat.prototype.getAccessToken = function(){
     var that = this;
-    return new Promise(function(resolve,reject){
-        var currentTime = new Date().getTime();
-        var url = util.format(that.accessTokenApi,that.apiDomain,that.appID,that.appScrect);
-        if(accessTokenJson.access_token === "" || accessTokenJson.expires_time < currentTime){
-            that.requestGet(url).then(function(data){
-                var result = JSON.parse(data); 
-                if(data.indexOf("errcode") < 0){
-                    accessTokenJson.access_token = result.access_token;
-                    accessTokenJson.expires_time = new Date().getTime() + (parseInt(result.expires_in) - 200) * 1000;
-                    fs.writeFile('./wechat/access_token.json',JSON.stringify(accessTokenJson));
-                    resolve(accessTokenJson.access_token);
-                }else{
-                    reject(result);
-                } 
-            });
-        }else{
-            resolve(accessTokenJson.access_token);  
-        }
-    });
+
+    let queryParams = {
+        'grant_type':'client_credential',
+        'appid':that.appID,
+        'secret':that.appScrect
+    };
+
+    let wxGetAccessTokenBaseUrl = 'https://api.weixin.qq.com/cgi-bin/token?'+qs.stringify(queryParams);
+    let options ={
+        method:'GET',
+        url:wxGetAccessTokenBaseUrl
+    };
+    return new Promise((resolve,reject) =>{
+         request(options,function(err,res,body){
+             if(res){
+                 resolve(JSON.parse(body));
+             }else{
+                 reject(err);
+             }
+         });
+     })
 }
 
 module.exports = weChat;
