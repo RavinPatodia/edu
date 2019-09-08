@@ -2,6 +2,7 @@
 let crypto = require('crypto');
 let https = require('https');
 let util = require('util');
+let fs = require('fs');
 let accessTokenJson = require('./access_token');
 
 var weChat = function(config){
