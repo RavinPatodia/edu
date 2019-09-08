@@ -21,4 +21,8 @@ app.get('/getAccessToken',function(req,res){
   });
 });
 
+app.get('/createmenu',function(req,res){
+  wecharApp.createMenu();
+});
+
 app.listen(3000);

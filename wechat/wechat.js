@@ -31,24 +31,7 @@ var weChat = function(config){
 }
 
 weChat.prototype.auth = function(req,res){
-  
-  this.getAccessToken().then(function(data){
-    let options={
-        url:'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' + data,
-        form: JSON.stringify(menus),
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    };
-    request.post(options,function(err,res,body){
-        if(err){
-            console.log(err)
-        }else{
-            console.log(body);
-        }
-    });
-  });
-  
+
   let signature = req.query.signature;
   let timestamp = req.query.timestamp;
   let nonce =req.query.nonce;
@@ -104,5 +87,24 @@ let menus={
            }]
        }]
 };
+
+weChat.prototype.createMenu = function(){
+    this.getAccessToken().then(function(data){
+        let options={
+            url:'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' + data,
+            form: JSON.stringify(menus),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        };
+        request.post(options,function(err,res,body){
+            if(err){
+                console.log(err)
+            }else{
+                console.log(body);
+            }
+        });
+      });
+}
 
 module.exports = weChat;
