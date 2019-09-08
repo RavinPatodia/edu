@@ -13,7 +13,7 @@ var token={
     },
     getToken: function(){
         return new Promise(function(resolve,reject){
-            fs.exist(ACCESS_TOKEN_FILE,function(exists){
+            fs.exists(ACCESS_TOKEN_FILE,function(exists){
                 if(exists){
                     let token = fs.readFile(ACCESS_TOKEN_FILE);
                     token =token?JSON.parse(token.trim()):token;
