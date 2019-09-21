@@ -7,14 +7,24 @@ const wxToken =require('./wxToken');
 let menus = {
  "button": [
      {
-         "name":"testMenu",
+         "name":"课程",
          "sub_button":[
              {
                  "type":"view",
-                 "name":"login",
-                 "url":""
+                 "name":"查询",
+                 "url":"https://www.baidu.com/"
              }]
-     }]
+     },
+     {    
+          "type":"view",
+          "name":"成绩",
+          "url":"https://www.baidu.com/"
+      },
+      {    
+          "type":"view",
+          "name":"反馈",
+           "url":"https://www.baidu.com/"
+        }]
 };
 
 let createMenu = function(token){
