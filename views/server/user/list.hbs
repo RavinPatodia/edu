@@ -1,0 +1,49 @@
+
+<!-- main content start-->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="lists">
+                    <p class="lead">
+                        <a href="{{adminDir}}/user/add" class="btn btn-default btn-sm">添加用户</a>
+                    </p>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>用户名 </th>
+                            <th>姓名</th>
+                            <th>角色</th>
+                            <th>创建人</th>
+                            <th>创建日期</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each users}}
+                        <tr>
+                            <td> <a href="{{../adminDir}}/user/{{id}}" title="{{user.email}}">{{username}}</a></td>
+                            <td>{{name}}</td>
+                            <td>{{#each roles}}{{name}}{{/each}}</td>
+                            <td>{{#each author}}{{name}}{{/each}}</td>
+                            <td>{{dateFormat created 'yyyy-MM-dd hh:mm:ss'}}</td>
+
+                            <td> <a href="{{../adminDir}}/user/{{id}}/edit" class="btn btn-default btn-xs">编辑</a>
+
+
+                                <a data-toggle="modal"
+                                   data-target="#myModal"
+                                   data-url="{{../adminDir}}/user/{{id}}/del"
+                                   class="btn btn-default btn-xs"
+                                >删除
+                                </a>
+
+                            </td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+<!-- main content end-->

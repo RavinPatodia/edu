@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-md-12">
+
+        <p class="lead">
+            <a href="{{adminDir}}/role/add" class="btn btn-default btn-sm">添加角色</a>
+        </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>名称</th>
+                <th>创建人</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each roles}}
+            <tr>
+                <td><a href="{{../adminDir}}/role/{{id}}">{{name}}</a></td>
+                <td>{{#if author}}{{author.name}}{{else}}无{{/if}}
+                </td>
+                <td>{{dateFormat created 'yyyy-MM-dd hh:mm:ss'}}</td>
+                <td>
+                    <a href="{{../adminDir}}/role/{{id}}/edit" class="btn btn-default btn-xs">编辑</a>&nbsp;
+
+                    <a data-toggle="modal"
+                       data-target="#myModal"
+                       data-url="{{../adminDir}}/role/{{id}}/del"
+                       class="btn btn-default btn-xs"
+                    >删除
+                    </a>
+                </td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<!-- Load these page level functions-->
+{{#section 'scripts'}}
+    <script type="text/javascript">
+        var token = '{{token}}';
+        $(function() {
+            $(document).on('click', '.J_del', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var url = $this.attr('href');
+                $.post(url, {_csrf: token}, function(res) {
+                    console.log(res);
+                    var status = res.status;
+                    if (status) {
+                        alert('删除成功')
+                        setTimeout(function() {
+                            $this.closest('tr').remove();
+                        }, 1000)
+
+                    } else {
+                        alert('删除失败')
+                    }
+                })
+            })
+        })
+    </script>
+{{/section}}
+

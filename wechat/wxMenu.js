@@ -29,7 +29,7 @@ let menus = {
 
 let createMenu = function(token){
     let options = {
-        url:config.createMenuApi+token,
+        url:config.wechat.createMenuApi+token,
         form:JSON.stringify(menus),
         headers:{
             'Content-Type': 'application/x-www-form-urlencoded'

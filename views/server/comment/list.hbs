@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>内容</th>
+                <th>作者</th>
+                <th>来自</th>
+                <th>IP</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each comments}}
+            <tr>
+                <td><a href="{{../adminDir}}/comment/{{id}}">{{content}}</a></td>
+                <td>{{#if author }}{{author.name}} {{else}}匿名{{/if}}</td>
+                <td>{{#if from }}<a href="/content/{{from._id}}#{{id}}" target="_blank">{{from.title}} <i class="fa fa-external-link"></i></a>{{/if}}
+                </td>
+                <td>{{ip}}</td>
+                <td>{{dateFormat created 'yyyy-MM-dd hh:mm:ss'}}</td>
+                <td>
+                    <a data-toggle="modal"
+                       data-target="#myModal"
+                       data-url="{{../adminDir}}/comment/{{id}}/del"
+                       class="btn btn-default btn-xs">删除</a>
+                </td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        {{#if pageInfo}}
+            {{#compare pageInfo.totalPage '>' 1}}
+                <ul class="pagination">{{{pagination pageInfo}}}</ul>
+            {{/compare}}
+        {{/if}}
+
+    </div>
+</div>
+

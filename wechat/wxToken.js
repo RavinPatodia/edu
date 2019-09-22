@@ -36,14 +36,14 @@ let getToken=function(){
         });
     };
 
-let reloadToken=function(){
+let reloadToken=function(grantType){
         let queryParams = {
             'grant_type':'client_credential',
-            'appid':config.appID,
-            'secret':config.appsecret
+            'appid':config.wechat.appID,
+            'secret':config.wechat.appsecret
         };
     
-        let wxGetAccessTokenBaseUrl = config.accessTokenApi+qs.stringify(queryParams);
+        let wxGetAccessTokenBaseUrl = config.wechat.accessTokenApi+qs.stringify(queryParams);
         let options ={
             method:'GET',
             url:wxGetAccessTokenBaseUrl

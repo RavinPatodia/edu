@@ -1,0 +1,21 @@
+
+    <div class="contact-content">
+
+        <form action="" method="POST" role="form" class="ui form">
+        <div class="ui reply form J_commentForm pdt20">
+            <div class="field">
+                <input name="name" placeholder="您的名字" class="J_input_name">
+            </div>
+            <div class="field">
+                <input name="email" placeholder="您的邮箱" class="J_input_email">
+            </div>
+            <div class="field">
+                <textarea name="content" placeholder="您的留言" class="J_textarea"></textarea>
+                <input type="hidden" name="_csrf" value="{{token}}">
+            </div>
+            <button class="J_submit">发送</button>
+        </div>
+        </form>
+
+
+    </div>

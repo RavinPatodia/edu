@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-12">
+        <p class="lead"><a href="{{adminDir}}/file/add" class="btn btn-default btn-sm">添加文件</a></p>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>名称</th>
+                <th>创建人</th>
+                <th>类型</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each files}}
+            <tr>
+                <td>
+                    <div class="gallery-item">
+                        <a href="{{url}}" target="_blank">
+                        {{#compare type 'contains' 'image'}}
+
+                                <img src="{{#if md_url}}{{md_url}}{{else}}{{url}}{{/if}}" title="{{name}}">
+
+                        {{else}}
+
+                                <span title="{{name}}" class="fa file-holder fa-file"></span>
+
+                        {{/compare}}
+                        </a>
+                    </div>
+                </td>
+                <td>{{author.username}}
+                </td>
+                <td>{{type}}</td>
+                <td>{{dateFormat created 'yyyy-MM-dd hh:mm:ss'}}</td>
+                <td>
+                    <a data-toggle="modal"
+                       data-target="#myModal"
+                       data-url="{{../adminDir}}/file/{{id}}/del"
+                       class="btn btn-default btn-xs">删除</a>
+                </td>
+            </tr>
+         {{/each}}
+            </tbody>
+        </table>
+        {{#if pageInfo}}
+            {{#compare pageInfo.totalPage '>' 1}}
+                <ul class="pagination">{{{pagination pageInfo}}}</ul>
+            {{/compare}}
+        {{/if}}
+    </div>
+</div>

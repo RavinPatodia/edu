@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>管理后台 - {{title}}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="/assets/server/img/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap core CSS-->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts from Font Awsome-->
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom styles for this theme-->
+    <link rel="stylesheet" href="/assets/server/css/main.css">
+
+    <!-- Custom styles for this page-->
+    {{#each cssList}}
+        <link rel='stylesheet' href={{this}} />
+    {{/each}}
+</head>
+<body>
+<section id="container">
+    {{> header}}
+
+    <!-- sidebar left start-->
+    {{> sidebar}}
+
+    <!-- sidebar left end-->
+    <!-- main content start-->
+    <section class="main-content-wrapper">
+        <section id="main-content">
+            {{{body}}}
+        </section>
+    </section>
+
+    <!-- main content end-->
+</section>
+<!-- Global JS-->
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/assets/server/js/application.js"></script>
+
+    <!-- Custom styles for this page-->
+    {{#each jsList}}
+      <script src={{this}}></script>
+    {{/each}}
+
+    <!-- Load these page level functions-->
+    {{{_sections.scripts}}}
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>确认删除？</p>
+                <div class="checkbox deleteOriginal dis_none"><label>
+                    <input type="checkbox" >勾选该复选框将会删除原图</label></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger confirm">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

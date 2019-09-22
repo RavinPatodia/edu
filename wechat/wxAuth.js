@@ -10,7 +10,7 @@ let auth = function(req,res){
     let nonce =req.query.nonce;
     let echostr = req.query.echostr;
   
-    let array = [config.token,timestamp,nonce];
+    let array = [config.wechat.token,timestamp,nonce];
     array.sort();
     
     let sortStr = array.join('');

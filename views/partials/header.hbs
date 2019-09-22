@@ -1,0 +1,28 @@
+<header id="header">
+    <!-- logo start-->
+    <div class="brand"><a href="{{adminDir}}" class="logo">Frogo</a></div>
+    <!-- logo end-->
+    <div class="user-nav">
+        <ul>
+            {{#if User}}
+                <li class="profile-photo"><img src="{{avatar User.email}}" alt="" class="img-circle">
+                </li>
+                <li class="dropdown settings"><a data-toggle="dropdown" href="" class="dropdown-toggle">{{User.name}}  <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{adminDir}}/me">
+                            <i class="fa fa-user">
+
+                        </i> 个人资料</a></li>
+                        <!--li
+                        a(href='index.html#')
+                            i.fa.fa-envelope
+                            |  消息
+                            span#user-inbox.badge.badge-danager 5
+                        -->
+                        <li><a href="{{adminDir}}/user/logout"><i class="fa fa-power-off"></i> 登出</a></li>
+                    </ul>
+                </li>
+            {{/if}}
+        </ul>
+    </div>
+</header>

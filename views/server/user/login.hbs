@@ -1,0 +1,31 @@
+
+
+
+
+<div class="login">
+    <div class="box">
+        <form method="post">
+            <input name="action" value="login" type="hidden">
+            <input id="username" name="username" placeholder="用户名" required="" type="text">
+            <hr class="hr15">
+            <input id="password" name="password" placeholder="密码" required="" type="password">
+            <input type="hidden" name="_csrf" value="{{token}}">
+            <hr class="hr15">
+            <input value="登录" style="width:100%;" type="submit">
+
+
+        </form>
+    </div>
+    <h6 class="help"><a href="/admin/user/forget">忘记密码</a> <a href="/" style="float:right">←返回首页</a></h6>
+
+
+</div>
+
+
+
+
+{{css '/assets/server/css/style.css'}}
+
+
+
+

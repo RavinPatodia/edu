@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-md-12">
+       <p class="lead">
+           <a href="{{adminDir}}/page/add" class="btn btn-default btn-sm J_post">新增页面</a>
+       </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>标题</th>
+                <th>内容</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each pages}}
+            <tr>
+                <td> <a href="/page/{{id}}" target="_blank">{{title}} <i class="fa fa-external-link"></i></a></td>
+                <td><a href="{{../adminDir}}/page/{{id}}">{{content}}</a> </td>
+                <td>{{dateFormat created 'yyyy-MM-dd hh:mm:ss'}}</td>
+                <td>
+                    <a data-toggle="modal"
+                       data-target="#myModal"
+                       data-url="{{../adminDir}}/page/{{id}}/del"
+                       class="btn btn-default btn-xs">删除</a>
+                    </td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        {{#if pageInfo}}
+            {{#compare pageInfo.totalPage '>' 1}}
+                <ul class="pagination">{{{pagination pageInfo}}}</ul>
+            {{/compare}}
+        {{/if}}
+    </div>
+</div>
+
+
+
+
+
+<!-- Load these page level functions-->
+{{#section 'scripts'}}
+    <script type="text/javascript">
+        var token = '{{token}}'
+        $(document).on('click', '.J_post', function(e) {
+            e.preventDefault()
+            var $this = $(this),
+                $modal = $('#myModal') ,
+                url = $this.attr('href')
+            var request = function(title, content) {
+                $.post(url, {
+                    _csrf: token,
+                    title: title,
+                    content: content
+                }, function(json) {
+                    console.log(json)
+                    alert('增加成功')
+                    window.location.reload()
+                });
+            };
+
+            var htmlStr = '      <div class="modal-header">\n' +
+                    '                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\n' +
+                    '                <h4 class="modal-title" id="myModalLabel">新增页面</h4>\n' +
+                    '            </div>\n' +
+                    '            <div class="modal-body">\n' +
+                    '                      <div class="form-group">' +
+                                '              <label>标题</label>' +
+                                '              <input name="title" class="form-control">' +
+                                '          </div>' +
+                                '          <div class="form-group">' +
+                                '              <label>内容</label>' +
+                                '              <textarea rows="4" name="content" class="form-control"></textarea>' +
+                                '          </div>' +
+                    '            </div>\n' +
+                    '            <div class="modal-footer">\n' +
+                    '                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>\n' +
+                    '                <button type="button" class="btn btn-danger confirm">提交</button>\n' +
+                    '            </div>'
+
+
+            $modal.find('.modal-dialog').removeClass('modal-sm')
+            $modal.find('.modal-content').empty().append(htmlStr)
+            $modal.modal('show')
+            $modal.on('click','button.confirm',function(){
+                var title = $modal.find('input').val(),
+                    content = $modal.find('textarea').val()
+                request(title, content)
+            })
+        });
+
+    </script>
+{{/section}}
